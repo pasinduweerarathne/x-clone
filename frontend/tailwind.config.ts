@@ -15,6 +15,10 @@ export default {
         lg: "988px",
         xl: "1070px",
         xxl: "1265px",
+        h500: { raw: "(min-height: 500px)" },
+        h600: { raw: "(min-height: 600px)" },
+        h700: { raw: "(min-height: 700px)" },
+        h800: { raw: "(min-height: 800px)" },
       },
       colors: {
         textGray: "#71767b",
