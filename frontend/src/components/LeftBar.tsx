@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "./Image";
 
@@ -64,55 +66,60 @@ const menuList = [
   },
 ];
 
-const LeftBar = () => {
+const LeftBar = ({ onOpenPostModal }: { onOpenPostModal: () => void }) => {
   return (
     <div className="h-screen sticky top-0 flex flex-col justify-between pt-2 pb-8">
-      {/* TOP: LOGO + SCROLLABLE MENU */}
-      <div className="flex flex-col gap-4 text-lg items-center xxl:items-start flex-1 min-h-0">
-        {/* LOGO - fixed, never scrolls */}
-        <Link href="/" className="p-2 rounded-full hover:bg-[#181818] shrink-0">
+      {/* LOGO MENU BUTTON */}
+      <div className="flex flex-col gap-4 text-lg items-center xxl:items-start">
+        {/* LOGO */}
+        <Link href="/" className="p-2 rounded-full hover:bg-[#181818]">
           <Image path="icons/logo.svg" alt="logo" w={24} h={24} />
         </Link>
-
-        {/* MENU LIST - scrollable */}
-        <div className="flex flex-col gap-4 max-h-[300px] h500:max-h-[350px] h600:max-h-[400px] h700:max-h-[500px] h800:max-h-[650px] overflow-y-auto thin-scrollbar">
-          {menuList.map((item) => (
-            <Link
-              href={item.link}
-              className="p-2 rounded-full hover:bg-[#181818] flex items-center gap-4"
-              key={item.id}
-            >
-              <Image
-                path={`icons/${item.icon}`}
-                alt={item.name}
-                w={24}
-                h={24}
-              />
-              <span className="hidden xxl:inline">{item.name}</span>
-            </Link>
-          ))}
-
-          {/* BUTTON - fixed, never scrolls */}
-          <Link
-            href="/compose/post"
-            className="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center xxl:hidden shrink-0"
+        <div className="max-h-[calc(100vh-200px)] overflow-y-auto thin-scrollbar flex flex-col justify-between gap-4 xxl:gap-8">
+          {/* MENU LIST */}
+          <div className="flex flex-col gap-4">
+            {menuList.map((item) => (
+              <Link
+                href={item.link}
+                className="p-2 rounded-full hover:bg-[#181818] flex items-center gap-4"
+                key={item.id}
+              >
+                <Image
+                  path={`icons/${item.icon}`}
+                  alt={item.name}
+                  w={24}
+                  h={24}
+                />
+                <span className="hidden xxl:inline">{item.name}</span>
+              </Link>
+            ))}
+          </div>
+          {/* BUTTON */}
+          <button
+            onClick={onOpenPostModal}
+            className="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center xxl:hidden"
           >
             <Image path="icons/post.svg" alt="new post" w={24} h={24} />
-          </Link>
-          <Link
-            href="/compose/post"
-            className="hidden xxl:block bg-white text-black rounded-full font-bold py-2 px-20 shrink-0"
+          </button>
+          <button
+            onClick={onOpenPostModal}
+            className="hidden xxl:block bg-white text-black rounded-full font-bold py-2 px-20"
           >
             Post
-          </Link>
+          </button>
         </div>
       </div>
-
-      {/* USER - fixed at bottom, always visible */}
-      <div className="flex items-center justify-between shrink-0">
+      {/* USER */}
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 relative rounded-full overflow-hidden">
-            <Image path="/general/avatar.png" alt="lama dev" w={100} h={100} />
+            <Image
+              path="/general/avatar.png"
+              alt="lama dev"
+              w={100}
+              h={100}
+              tr={true}
+            />
           </div>
           <div className="hidden xxl:flex flex-col">
             <span className="font-bold">Lama Dev</span>

@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Image from "./Image";
 import NextImage from "next/image";
-import ImageEditor from "./ImageEditor";
 import { shareAction } from "@/actions";
+import ImageEditor from "./ImageEditor";
 
 const Share = () => {
   const [media, setMedia] = useState<File | null>(null);
@@ -28,7 +28,7 @@ const Share = () => {
   return (
     <form
       className="p-4 flex gap-4"
-      action={(FormData) => shareAction(FormData, settings)}
+      action={(formData) => shareAction(formData, settings)}
     >
       {/* AVATAR */}
       <div className="relative w-10 h-10 rounded-full overflow-hidden">
@@ -54,8 +54,8 @@ const Share = () => {
                 settings.type === "original"
                   ? "h-full object-contain"
                   : settings.type === "square"
-                    ? "aspect-square object-cover"
-                    : "aspect-video object-cover"
+                  ? "aspect-square object-cover"
+                  : "aspect-video object-cover"
               }`}
             />
             <div

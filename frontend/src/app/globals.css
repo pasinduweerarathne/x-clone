@@ -18,18 +18,3 @@ body {
       [scrollbar-color:#333_transparent];
   }
 }
-
-/* .thin-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-.thin-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-.thin-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #333;
-  border-radius: 9999px;
-}
-.thin-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #333 transparent;
-} */

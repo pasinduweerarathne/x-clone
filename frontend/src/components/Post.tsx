@@ -1,10 +1,9 @@
-import React from "react";
+import { imagekit } from "@/utils";
 import Image from "./Image";
-import Link from "next/link";
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteractions";
-import { imageKit } from "@/utils";
 import Video from "./Video";
+import Link from "next/link";
 
 interface FileDetailsResponse {
   width: number;
@@ -16,19 +15,23 @@ interface FileDetailsResponse {
 }
 
 const Post = async ({ type }: { type?: "status" | "comment" }) => {
-  const getFileDetails = async (
-    fileId: string,
-  ): Promise<FileDetailsResponse> => {
-    return new Promise((resolve, reject) => {
-      imageKit.getFileDetails(fileId, function (error, result) {
-        if (error) reject(error);
-        else resolve(result as FileDetailsResponse);
-      });
-    });
-  };
+ 
+  // FETCH POST MEDIA
 
-  // const fileDetails = await getFileDetails("6a474d215c7cd75eb85f27d3");
-  const fileDetails = await getFileDetails("6a475e835c7cd75eb8da36e9");
+  // const getFileDetails = async (
+  //   fileId: string
+  // ): Promise<FileDetailsResponse> => {
+  //   return new Promise((resolve, reject) => {
+  //     imagekit.getFileDetails(fileId, function (error, result) {
+  //       if (error) reject(error);
+  //       else resolve(result as FileDetailsResponse);
+  //     });
+  //   });
+  // };
+
+  // const fileDetails = await getFileDetails("675d943be375273f6003858f");
+
+  // console.log(fileDetails);
 
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
@@ -102,20 +105,11 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
               iure nam voluptas soluta pariatur inventore.
             </p>
           </Link>
-          {/* {fileDetails && (
-            <Image
-              path={fileDetails.filePath.replace(/^\/x-clone/, "")}
-              alt=""
-              w={fileDetails.width}
-              h={fileDetails.height}
-              // className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
-            />
-          )} */}
-          {/* <Image path="general/post.jpeg" alt="" w={600} h={600} /> */}
+          <Image path="general/post.jpeg" alt="" w={600} h={600} />
           {/* AFTER FETCHING THE POST MEDIA */}
-          {fileDetails && fileDetails.fileType === "image" ? (
+          {/* {fileDetails && fileDetails.fileType === "image" ? (
             <Image
-              path={fileDetails.filePath.replace(/^\/x-clone/, "")}
+              path={fileDetails.filePath}
               alt=""
               w={fileDetails.width}
               h={fileDetails.height}
@@ -123,10 +117,10 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
             />
           ) : (
             <Video
-              path={fileDetails.filePath.replace(/^\/x-clone/, "")}
+              path={fileDetails.filePath}
               className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
             />
-          )}
+          )} */}
           {type === "status" && (
             <span className="text-textGray">8:41 PM · Dec 5, 2024</span>
           )}

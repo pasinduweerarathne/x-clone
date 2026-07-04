@@ -1,30 +1,30 @@
 "use server";
 
-import { imageKit } from "./utils";
+import { imagekit } from "./utils";
 
 export const shareAction = async (
   formData: FormData,
-  settings: { type: "original" | "wide" | "square"; sensitive: boolean },
+  settings: { type: "original" | "wide" | "square"; sensitive: boolean }
 ) => {
   const file = formData.get("file") as File;
-  //   const desc = formData.get("desc") as string;
+  // const desc = formData.get("desc") as string;
 
-  const bites = await file.arrayBuffer();
-  const buffer = Buffer.from(bites);
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
 
-  const transformation = `w-600 ${
+  const transformation = `w-600, ${
     settings.type === "square"
       ? "ar-1-1"
       : settings.type === "wide"
-        ? "ar-16-9"
-        : ""
+      ? "ar-16-9"
+      : ""
   }`;
 
-  imageKit.upload(
+  imagekit.upload(
     {
       file: buffer,
       fileName: file.name,
-      folder: "/x-clone/posts",
+      folder: "/posts",
       ...(file.type.includes("image") && {
         transformation: {
           pre: transformation,
@@ -37,6 +37,6 @@ export const shareAction = async (
     function (error, result) {
       if (error) console.log(error);
       else console.log(result);
-    },
+    }
   );
 };
